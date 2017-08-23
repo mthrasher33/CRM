@@ -1,0 +1,32 @@
+[
+    {
+        "id": 1,
+        "tone": "Formal",
+        "type": "Greeting",
+        "text": "greetingType, firstName! Welcome to companyName. We hope you find everything to your liking."
+    },
+    {
+        "id": 2,
+        "tone": "Casual",
+        "type": "Greeting",
+        "text": "greetingType, firstName! Hope you enjoy the rad digs here at companyName :)"
+    },
+    {
+        "id": 3,
+        "tone": "Formal",
+        "type": "Check-out reminder",
+        "text": "greetingType, firstName! A gentle reminder that the hour of your departure is fast approaching. Let us know if you have any questions about check-out"
+    },
+    {
+        "id": 4,
+        "tone": "Casual",
+        "type": "Room service ad",
+        "text": "greetingType, firstName! Let us know if you want some grub off our room-service menu :)"
+    },
+    {
+        "id": 5,
+        "tone": "Formal",
+        "type": "Farewell",
+        "text": "greetingType, firstName! We are afraid it is time to fare thee well."
+    }
+]

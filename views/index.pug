@@ -1,0 +1,79 @@
+extends layout
+
+block content
+  h1= title
+  p Welcome to the #{title}
+
+  select.company
+    each company in companies
+      option(value=company.id) #{company.company}
+  br
+
+  select.guest
+    each guest in guests
+      option(value=guest.id) #{guest.lastName}, #{guest.firstName}
+  br
+
+  select.message
+    each message in messages
+      option(value=message.id) #{message.tone} #{message.type}
+  
+  br
+  a.button#preview Preview Your Message
+
+  br
+  a.button#add_message Create New Message Template
+  
+  h2.message 
+  
+  form(action='/addMessage', method='POST').hidden
+    div.form-group
+      label(for='tone') Tone:
+      input(type='text', name='tone', value='')
+    div.form-group
+      label(for='type') Type:
+      input(type='text', name='type', value='')
+    div.form-group
+      label(for='message') Message:
+      input(type='textarea', cols='50', rows='10', name='message', value='')
+      p *Template variables: firstName, greetingType, companyName
+    div.form-group
+      input(type='submit', value='Submit').submit
+  
+  h3.success
+
+  block script
+    script(src="/javascripts/jquery-3.1.0.min.js")
+    script(type='text/javascript').
+      $(document).ready(function(){
+      
+      $('a#preview').click(function(){
+      	//preview the message
+      	var selectedMessage = $('select.message').val()
+      	var selectedGuest = $('select.guest option:selected').text().split(',')[1].replace(' ','') //string doctoring to get the first name
+      	var selectedCompany = $('select.company option:selected').text()
+      	$.getJSON("/getMessage/" + selectedMessage + "/" + selectedGuest + "/" + selectedCompany, function(data){
+      		if(data)
+      		var message = data;
+      		$('h3.success').text('')
+          $('h2.message').text(data.message)
+      	})
+      })
+
+      $('a#add_message').click(function(){
+        //empty the preview box if it has text
+        $('h2.message').text('')
+        //reveal form input
+        $('form.hidden').removeClass('hidden')
+      })
+
+      $('input.submit').click(function(){
+        $('form').addClass('hidden')
+        $('h3.success').text('Message successfully added!')
+      })
+
+      })
+
+
+
+
